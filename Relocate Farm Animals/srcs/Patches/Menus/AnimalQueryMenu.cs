@@ -7,7 +7,7 @@ using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
-using StardewValley.Buildings;
+using RelocateFarmAnimals.Utilities;
 
 namespace RelocateFarmAnimals.Patches
 {
@@ -56,41 +56,23 @@ namespace RelocateFarmAnimals.Patches
 
 			if (__instance.moveHomeButton.containsPoint(x, y))
 			{
-				List<KeyValuePair<string, string>> list = new();
-
-				Game1.playSound("smallSelect");
-				foreach (GameLocation location in Game1.locations)
+				void OnResponse(string response)
 				{
-					if (location.buildings.Any((Building p) => p.GetIndoors() is AnimalHouse) && (!Game1.IsClient || location.CanBeRemotedlyViewed()))
-					{
-						list.Add(new KeyValuePair<string, string>(location.NameOrUniqueName, location.DisplayName));
-					}
-				}
-				if (!list.Any())
-				{
-					Farm farm = Game1.getFarm();
-
-					list.Add(new KeyValuePair<string, string>(farm.NameOrUniqueName, farm.DisplayName));
-				}
-				Game1.currentLocation.ShowPagedResponses(ModEntry.Helper.Translation.Get("RelocateAnimalMenu.ChooseLocation"), list, delegate(string value)
-				{
-					GameLocation locationFromName = Game1.getLocationFromName(value);
+					GameLocation locationFromName = Game1.getLocationFromName(response);
 
 					if (locationFromName != null)
 					{
 						TargetLocation = locationFromName;
-						if (Game1.activeClickableMenu is not null && Game1.activeClickableMenu is DialogueBox)
-						{
-							(Game1.activeClickableMenu as DialogueBox).closeDialogue();
-						}
 						Game1.activeClickableMenu = __instance;
 						Game1.globalFadeToBlack(__instance.prepareForAnimalPlacement);
 					}
 					else
 					{
-						ModEntry.Monitor.Log("Can't find location '" + value + "' for animal relocate menu.", LogLevel.Error);
+						ModEntry.Monitor.Log("Can't find location '" + response + "' for animal relocate menu.", LogLevel.Error);
 					}
-				}, auto_select_single_choice: true);
+				}
+
+				PagedResponsesMenuUtility.Open(ModEntry.Helper.Translation.Get("RelocateAnimalMenu.ChooseLocation"), PagedResponsesMenuUtility.GetRelocateFarmAnimalsResponses(), OnResponse, auto_select_single_choice: true, returnToPreviousMenuAfterClose: false);
 				return false;
 			}
 			return true;
