@@ -2,9 +2,9 @@
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
-using RelocateFarmAnimals.Utilities;
+using RelocateBuildingsAndFarmAnimals.Utilities;
 
-namespace RelocateFarmAnimals.Handlers
+namespace RelocateBuildingsAndFarmAnimals.Handlers
 {
 	internal static class ButtonPressedHandler
 	{

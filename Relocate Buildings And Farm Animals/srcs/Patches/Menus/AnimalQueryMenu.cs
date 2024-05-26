@@ -7,9 +7,9 @@ using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
-using RelocateFarmAnimals.Utilities;
+using RelocateBuildingsAndFarmAnimals.Utilities;
 
-namespace RelocateFarmAnimals.Patches
+namespace RelocateBuildingsAndFarmAnimals.Patches
 {
 	internal class AnimalQueryMenuPatch
 	{

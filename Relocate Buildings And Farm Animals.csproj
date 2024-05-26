@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<ProjectName>Relocate Farm Animals</ProjectName>
-		<AssemblyName>RelocateFarmAnimals</AssemblyName>
+		<ProjectName>Relocate Buildings And Farm Animals</ProjectName>
+		<AssemblyName>RelocateBuildingsAndFarmAnimals</AssemblyName>
 		<Version>1.0.0</Version>
 		<TargetFramework>net6.0</TargetFramework>
 		<EnableHarmony>true</EnableHarmony>

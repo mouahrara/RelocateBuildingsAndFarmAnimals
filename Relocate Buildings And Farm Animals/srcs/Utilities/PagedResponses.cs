@@ -8,7 +8,7 @@ using StardewValley;
 using StardewValley.Buildings;
 using StardewValley.Menus;
 
-namespace RelocateFarmAnimals.Utilities
+namespace RelocateBuildingsAndFarmAnimals.Utilities
 {
 	internal class PagedResponsesMenuUtility
 	{

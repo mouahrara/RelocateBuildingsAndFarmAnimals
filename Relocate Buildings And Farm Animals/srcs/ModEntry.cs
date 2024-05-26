@@ -1,10 +1,10 @@
 ﻿using System;
 using HarmonyLib;
 using StardewModdingAPI;
-using RelocateFarmAnimals.Handlers;
-using RelocateFarmAnimals.Patches;
+using RelocateBuildingsAndFarmAnimals.Handlers;
+using RelocateBuildingsAndFarmAnimals.Patches;
 
-namespace RelocateFarmAnimals
+namespace RelocateBuildingsAndFarmAnimals
 {
 	/// <summary>The mod entry point.</summary>
 	internal sealed class ModEntry : Mod

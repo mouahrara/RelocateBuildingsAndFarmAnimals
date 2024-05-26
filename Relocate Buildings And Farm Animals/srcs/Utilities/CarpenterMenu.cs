@@ -1,7 +1,7 @@
 using StardewModdingAPI.Utilities;
 using StardewValley;
 
-namespace RelocateFarmAnimals.Utilities
+namespace RelocateBuildingsAndFarmAnimals.Utilities
 {
 	internal class CarpenterMenuUtility
 	{
