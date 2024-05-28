@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<ProjectName>Relocate Buildings And Farm Animals</ProjectName>
 		<AssemblyName>RelocateBuildingsAndFarmAnimals</AssemblyName>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<TargetFramework>net6.0</TargetFramework>
 		<EnableHarmony>true</EnableHarmony>
 		<ProjectDir>$([System.IO.Path]::Combine($(MSBuildThisFileDirectory), $(ProjectName)))</ProjectDir>
