@@ -1,4 +1,4 @@
-The Relocate Buildings And Farm Animals mod allows you to relocate buildings and farm animals to new locations.
+The Relocate Buildings And Farm Animals mod allows you to relocate buildings and farm animals from one buildable location to another.
 
 ![](https://raw.githubusercontent.com/wiki/mouahrara/RelocateBuildingsAndFarmAnimals/images/main.jpg)
 

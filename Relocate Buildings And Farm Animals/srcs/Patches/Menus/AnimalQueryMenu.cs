@@ -41,17 +41,7 @@ namespace RelocateBuildingsAndFarmAnimals.Patches
 
 		private static bool ReceiveLeftClickPrefix(AnimalQueryMenu __instance, int x, int y)
 		{
-			if (Game1.globalFade)
-				return true;
-
-			bool movingAnimal = (bool)typeof(AnimalQueryMenu).GetField("movingAnimal", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(__instance);
-
-			if (movingAnimal)
-				return true;
-
-			bool confirmingSell = (bool)typeof(AnimalQueryMenu).GetField("confirmingSell", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(__instance);
-
-			if (confirmingSell)
+			if (Game1.globalFade || __instance.movingAnimal || __instance.confirmingSell)
 				return true;
 
 			if (__instance.moveHomeButton.containsPoint(x, y))
@@ -116,7 +106,7 @@ namespace RelocateBuildingsAndFarmAnimals.Patches
 						CodeInstruction[] replacementInstructions = new CodeInstruction[]
 						{
 							new(OpCodes.Ldarg_0),
-							new(OpCodes.Ldfld, typeof(AnimalQueryMenu).GetField("animal", BindingFlags.NonPublic | BindingFlags.Instance)),
+							new(OpCodes.Ldfld, typeof(AnimalQueryMenu).GetField("animal")),
 							new(OpCodes.Callvirt, typeof(FarmAnimal).GetProperty("currentLocation").GetGetMethod())
 						};
 						list.InsertRange(i, replacementInstructions);

@@ -29,7 +29,7 @@ namespace RelocateBuildingsAndFarmAnimals.Patches
 			if (__instance is not CarpenterMenu carpenterMenu || carpenterMenu.freeze || !carpenterMenu.onFarm || carpenterMenu.cancelButton.containsPoint(x, y) || Game1.IsFading())
 				return;
 
-			if (carpenterMenu.moving)
+			if (carpenterMenu.Action == CarpenterMenu.CarpentryAction.Move)
 			{
 				if (carpenterMenu.buildingToMove == null)
 				{
