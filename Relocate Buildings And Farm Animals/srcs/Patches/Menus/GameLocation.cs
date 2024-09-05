@@ -20,6 +20,10 @@ namespace RelocateBuildingsAndFarmAnimals.Patches
 				original: AccessTools.Method(typeof(GameLocation), nameof(GameLocation.buildStructure), new Type[] { typeof(Building), typeof(Vector2), typeof(Farmer), typeof(bool) }),
 				postfix: new HarmonyMethod(typeof(GameLocationPatch), nameof(BuildStructurePostfix))
 			);
+			harmony.Patch(
+				original: AccessTools.Method(typeof(GameLocation), nameof(GameLocation.AddDefaultBuilding), new Type[] { typeof(string), typeof(Vector2), typeof(bool) }),
+				prefix: new HarmonyMethod(typeof(GameLocationPatch), nameof(AddDefaultBuildingPrefix))
+			);
 		}
 
 		private static void BuildStructurePrefix(GameLocation __instance, Building building)
@@ -43,7 +47,9 @@ namespace RelocateBuildingsAndFarmAnimals.Patches
 			}
 			else
 			{
+				Farm farm = Game1.getFarm();
 				GameLocation indoors = building.GetIndoors();
+				string key = $"{ModEntry.ModManifest.UniqueID}_IsDefaultGreenhouse";
 
 				if (indoors is not null)
 				{
@@ -60,10 +66,51 @@ namespace RelocateBuildingsAndFarmAnimals.Patches
 						}
 					}
 				}
+				if (building is GreenhouseBuilding)
+				{
+					if (CarpenterMenuUtility.MainTargetLocation == farm)
+					{
+						if (!building.modData.ContainsKey(key))
+						{
+							building.modData.Add(key, "T");
+						}
+					}
+					if (carpenterMenu.TargetLocation == farm)
+					{
+						if (building.modData.ContainsKey(key))
+						{
+							building.modData.Remove(key);
+						}
+					}
+				}
 				carpenterMenu.TargetLocation = CarpenterMenuUtility.MainTargetLocation;
 				CarpenterMenuUtility.MainTargetLocation = null;
 				Game1.globalFadeToBlack(carpenterMenu.setUpForBuildingPlacement, 0.04f);
 			}
+		}
+
+		private static bool AddDefaultBuildingPrefix(GameLocation __instance, string id)
+		{
+			Farm farm = Game1.getFarm();
+			string key = $"{ModEntry.ModManifest.UniqueID}_IsDefaultGreenhouse";
+
+			if (id == "Greenhouse" && __instance == farm)
+			{
+				foreach (GameLocation location in Game1.locations)
+				{
+					if (location != farm && location.IsBuildableLocation())
+					{
+						foreach (Building building in location.buildings)
+						{
+							if (building.modData.ContainsKey(key))
+							{
+								return false;
+							}
+						}
+					}
+				}
+			}
+			return true;
 		}
 	}
 }

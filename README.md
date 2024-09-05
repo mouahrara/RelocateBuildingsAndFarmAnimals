@@ -29,7 +29,7 @@ Relocate Buildings And Farm Animals is compatible with Stardew Valley 1.6.0+ on 
 - **Can I use this mod on an existing save?**\
 Yes, no problem at all.
 - **Can I uninstall this mod without any issues?**\
-Yes.
+Yes. However, if you have relocated the greenhouse outside the main farm, it is recommended to move it back to the main farm before uninstalling the mod. Otherwise, the game will automatically build another greenhouse.
 
 ## See also
 - [Release notes](https://github.com/mouahrara/RelocateBuildingsAndFarmAnimals/releases)

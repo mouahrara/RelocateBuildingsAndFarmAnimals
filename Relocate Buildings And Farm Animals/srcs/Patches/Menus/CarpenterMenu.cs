@@ -6,7 +6,6 @@ using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
 using StardewValley.Buildings;
-using StardewValley.Locations;
 using RelocateBuildingsAndFarmAnimals.Utilities;
 
 namespace RelocateBuildingsAndFarmAnimals.Patches
@@ -40,7 +39,7 @@ namespace RelocateBuildingsAndFarmAnimals.Patches
 					{
 						if (buildingToMove.daysOfConstructionLeft.Value > 0)
 							return;
-						if ((buildingToMove.HasIndoorsName("Farmhouse") && buildingToMove.GetIndoors() is FarmHouse) || buildingToMove.isCabin || buildingToMove is GreenhouseBuilding)
+						if ((buildingToMove is not GreenhouseBuilding && !carpenterMenu.CanDemolishThis(buildingToMove)) || buildingToMove.isCabin)
 						{
 							Game1.addHUDMessage(new HUDMessage(ModEntry.Helper.Translation.Get("RelocateBuildingMessage.CannotRelocate"), HUDMessage.error_type));
 							Game1.playSound("cancel");
